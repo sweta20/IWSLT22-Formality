@@ -5,7 +5,7 @@ import os
 import argparse
 from utils import get_data, read_file
 sys.path.append("/fs/clip-controllablemt/IWSLT2022/notebooks/")
-from mbart_covariate import CMBartForConditionalGeneration
+from mbart_covariate import CMBartForConditionalGeneration,CMBartForConditionalGeneration2
 import torch
 
 tgt_lang_to_code = {
@@ -18,8 +18,8 @@ tgt_lang_to_code = {
 }
 
 direction_to_id = {
-	"formal":0,
-	"informal":1
+	"formal":1,
+	"informal":2
 }
 
 def translate_text(text, tgt_lang, model, tokenizer,  covariate_index=None, strategy="greedy"):
@@ -27,6 +27,7 @@ def translate_text(text, tgt_lang, model, tokenizer,  covariate_index=None, stra
 	kwargs = {}
 	if covariate_index is not None:
 		kwargs["covariate_ids"] = torch.tensor([covariate_index]*len(text))
+	print(kwargs)
 
 	if strategy == "greedy":
 		generated_tokens = model.generate(
@@ -57,6 +58,7 @@ def main():
 	arg_parser.add_argument('--is-covariate', dest='is_covariate', action='store_true')
 	arg_parser.add_argument('--eval-direction', '-f', type=str, default=None)
 	arg_parser.add_argument('--data-dir', type=str, default="internal_split")
+	arg_parser.add_argument('--variant', type=int, default=2)
 
 
 	args = arg_parser.parse_args()
@@ -66,8 +68,14 @@ def main():
 	tgt_lang=args.lang
 
 	if args.is_covariate:
-		model = CMBartForConditionalGeneration.from_pretrained(args.model_dir, cache_dir="/fs/clip-scratch/sweagraw/CACHE")
-		covariate_index = direction_to_id[args.eval_direction]
+		if args.variant == 1:
+			# Additive intervention added to encoder
+			model = CMBartForConditionalGeneration.from_pretrained(args.model_dir, cache_dir="/fs/clip-scratch/sweagraw/CACHE")
+			covariate_index = direction_to_id[args.eval_direction]
+		else:
+			# Additive intervention added to the LM
+			model = CMBartForConditionalGeneration2.from_pretrained(args.model_dir, cache_dir="/fs/clip-scratch/sweagraw/CACHE")
+			covariate_index = direction_to_id[args.eval_direction]
 	else:
 		model = MBartForConditionalGeneration.from_pretrained(args.model_dir, cache_dir="/fs/clip-scratch/sweagraw/CACHE")
 		covariate_index = None
@@ -78,15 +86,15 @@ def main():
 	output_dir=f"experiments/{src_lang}-{tgt_lang}/{args.exp_name}/{domain}"
 	os.makedirs(output_dir, exist_ok=True)
 
-	# with open(output_dir+"/out."+split, "w") as f:
-	# 	for src in source:
-	# 		f.write(translate_text([src], tgt_lang, model, tokenizer, covariate_index)[0] + "\n")
-
-	outputs = translate_text(source, tgt_lang, model, tokenizer, covariate_index)
-
 	with open(output_dir+"/out."+split, "w") as f:
-		for out in outputs:
-			f.write(out + "\n")
+		for src in source:
+			f.write(translate_text([src], tgt_lang, model, tokenizer, covariate_index)[0] + "\n")
+
+	# outputs = translate_text(source, tgt_lang, model, tokenizer, covariate_index)
+
+	# with open(output_dir+"/out."+split, "w") as f:
+	# 	for out in outputs:
+	# 		f.write(out + "\n")
 
 
 if __name__ == '__main__':

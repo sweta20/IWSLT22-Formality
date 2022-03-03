@@ -10,7 +10,7 @@ CACHE_DIR="/fs/clip-scratch/sweagraw/CACHE"
 
 def main():
 
-	arg_parser = argparse.ArgumentParser(description='Extract scores from trained xformal model')
+	arg_parser = argparse.ArgumentParser(description='Extract the probability scores of being informal from trained classifiers')
 	arg_parser.add_argument('--input', '-i', type=str, default=None)
 	arg_parser.add_argument('--output', '-o', type=str, default=None)
 	arg_parser.add_argument('--model-dir', '-m', type=str, default="/fs/clip-controllablemt/IWSLT2022/models/xformal-classifier")
