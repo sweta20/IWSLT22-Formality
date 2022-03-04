@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for tlang in es; do
+for tlang in es ja de hi; do
 	# bash `dirname $0`/prepare_data.sh ${tlang}
 
 	# # train baseline adapted on combined by default
@@ -53,20 +53,6 @@ for tlang in es; do
 		
 
 	done;
-
-	# get formality scores for evaluation
-	# for fname in internal_split/en-${tlang}/*; do
-	# 	if [[ ${fname} != *"annotated"* ]] && [[ ${fname} != *"scores"* ]] ; then
- #  			python `dirname $0`/get_xformal_scores.py -i ${fname} -o ${fname}.finetune.scores -m /fs/clip-controllablemt/IWSLT2022/models/xformal-classifier-${tlang}
-	# 	fi
-	# done
-
-	# get formality scores for evaluation
-	# for fname in internal_split/en-${tlang}/*; do
-	# 	if [[ ${fname} != *"annotated"* ]] && [[ ${fname} != *"scores"* ]] ; then
- #  			python `dirname $0`/get_xformal_scores.py -i ${fname} -o ${fname}.regr.scores --is-regression -m /fs/clip-controllablemt/IWSLT2022/models/xformal-regressor
-	# 	fi
-	# done
 
 done;
 

@@ -5,6 +5,7 @@ import os
 import argparse
 from utils import get_data, read_file
 import torch
+from tqdm import tqdm
 
 CACHE_DIR="/fs/clip-scratch/sweagraw/CACHE"
 
@@ -37,20 +38,16 @@ def main():
 		config=config,
 		cache_dir=CACHE_DIR)
 
-	scores = []
-	for text in source:
-		model_inputs = tokenizer(text, return_tensors="pt")
-		logits=model(**model_inputs).logits
-		if args.is_regression:
-			scores.append(logits.tolist()[0][0])
-		else:
-			# only write scores for informal class
-			scores.append(torch.softmax(logits, dim=1).tolist()[0][0])
-
 	with open(args.output, "w") as f:
-		for out in scores:
-			f.write(str(out) + "\n")
-
+		scores = []
+		for text in tqdm(source):
+			model_inputs = tokenizer(text, return_tensors="pt",truncation=True, padding=True, max_length=200)
+			logits=model(**model_inputs).logits
+			if args.is_regression:
+				f.write(str(logits.tolist()[0][0])+ "\n")
+			else:
+				# only write scores for informal class
+				f.write(str(torch.softmax(logits, dim=1).tolist()[0][0])+ "\n")
 	
 
 if __name__ == '__main__':
