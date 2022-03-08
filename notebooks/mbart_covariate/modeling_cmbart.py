@@ -361,7 +361,7 @@ class CMBartForConditionalGeneration2(CMBartPreTrainedModel):
 
     def __init__(self, config: CMBartConfig):
         super().__init__(config)
-        self.model = CMBartModel(config)
+        self.model = MBartModel(config)
         self.register_buffer("final_logits_bias", torch.zeros((1, self.model.shared.num_embeddings)))
         self.lm_head = nn.Linear(config.d_model, self.model.shared.num_embeddings, bias=False)
         self.covariate = nn.Embedding(config.num_covariates, config.d_model)
@@ -438,7 +438,6 @@ class CMBartForConditionalGeneration2(CMBartPreTrainedModel):
         outputs = self.model(
             input_ids,
             attention_mask=attention_mask,
-            covariate_ids=covariate_ids,
             decoder_input_ids=decoder_input_ids,
             encoder_outputs=encoder_outputs,
             decoder_attention_mask=decoder_attention_mask,
