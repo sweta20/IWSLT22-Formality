@@ -16,9 +16,10 @@ def main():
 	arg_parser.add_argument('--output', '-o', type=str, default=None)
 	arg_parser.add_argument('--model-dir', '-m', type=str, default="/fs/clip-controllablemt/IWSLT2022/models/xformal-classifier")
 	arg_parser.add_argument('--is-regression', dest='is_regression', action='store_true')
+	arg_parser.add_argument('--n', type=int, default=100000)
 
 	args = arg_parser.parse_args()
-	source = read_file(args.input)
+	source = read_file(args.input, args.n)
 
 	if args.is_regression:
 		num_labels=1

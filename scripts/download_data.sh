@@ -7,10 +7,10 @@
 
 # Parameters
 src=en
-tgt=hi
-name=CCMatrix
-version=v1
-global_data_dir=other_data/$src-$tgt
+tgt=it
+name=ParaCrawl
+version=v8
+global_data_dir=../mined_bitext/$name/$src-$tgt
 mkdir -p $global_data_dir
 cd $global_data_dir
 wget -O $src-$tgt.txt.zip http://opus.nlpl.eu/download.php?f=${name}/${version}/moses/$src-$tgt.txt.zip 

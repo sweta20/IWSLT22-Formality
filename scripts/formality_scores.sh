@@ -21,16 +21,33 @@
 # done;
 
 
-for fname in ../unpaired_res/*; do
-	if [[ ${fname} != *"_eval"* ]]  && [[ ${fname} != *"bleu"* ]] ; then
+# for fname in ../model_outputs/finetuned_paired_res/*; do
+# 	if [[ ${fname} != *".out"* ]]  && [[ ${fname} != *".sh"* ]] ; then
+# 		echo $fname
+# 		tlang=${fname: -2}
+#  			python `dirname $0`/get_xformal_scores.py -i ${fname} -o ${fname}.scores -m /fs/clip-controllablemt/IWSLT2022/models/xformal-classifier-${tlang}
+# 	fi
+# done
+
+# for fname in ../model_outputs/finetuned_unpaired_res/*; do
+# 	if [[ ${fname} != *".out"* ]]  && [[ ${fname} != *".sh"* ]] ; then
+# 		echo $fname
+# 		tlang=${fname: -2}
+#  			python `dirname $0`/get_xformal_scores.py -i ${fname} -o ${fname}.scores -m /fs/clip-controllablemt/IWSLT2022/models/xformal-classifier-${tlang}
+# 	fi
+# done
+
+
+for fname in ../model_outputs/finetuned-res/*; do
+	if [[ ${fname} != *".scores"* ]] && [[ ${fname} != *".out"* ]]  && [[ ${fname} != *".sh"* ]] ; then
 		echo $fname
 		tlang=${fname: -2}
  			python `dirname $0`/get_xformal_scores.py -i ${fname} -o ${fname}.scores -m /fs/clip-controllablemt/IWSLT2022/models/xformal-classifier-${tlang}
 	fi
 done
 
-for fname in ../paired_res/*; do
-	if [[ ${fname} != *"_eval"* ]]  && [[ ${fname} != *"bleu"* ]] ; then
+for fname in ../model_outputs/pretrained-res/*; do
+	if [[ ${fname} != *".scores"* ]] && [[ ${fname} != *".out"* ]]  && [[ ${fname} != *".sh"* ]] ; then
 		echo $fname
 		tlang=${fname: -2}
  			python `dirname $0`/get_xformal_scores.py -i ${fname} -o ${fname}.scores -m /fs/clip-controllablemt/IWSLT2022/models/xformal-classifier-${tlang}

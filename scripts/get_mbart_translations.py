@@ -5,7 +5,7 @@ import os
 import argparse
 from utils import get_data, read_file
 sys.path.append("/fs/clip-controllablemt/IWSLT2022/notebooks/")
-from mbart_covariate import CMBartForConditionalGeneration,CMBartForConditionalGeneration2
+from mbart_covariate import CMBartForConditionalGeneration
 import torch
 
 tgt_lang_to_code = {
@@ -27,7 +27,6 @@ def translate_text(text, tgt_lang, model, tokenizer,  covariate_index=None, stra
 	kwargs = {}
 	if covariate_index is not None:
 		kwargs["covariate_ids"] = torch.tensor([covariate_index]*len(text))
-	print(kwargs)
 
 	if strategy == "greedy":
 		generated_tokens = model.generate(
@@ -58,7 +57,6 @@ def main():
 	arg_parser.add_argument('--is-covariate', dest='is_covariate', action='store_true')
 	arg_parser.add_argument('--eval-direction', '-f', type=str, default=None)
 	arg_parser.add_argument('--data-dir', type=str, default="internal_split")
-	arg_parser.add_argument('--variant', type=int, default=2)
 
 
 	args = arg_parser.parse_args()
@@ -68,14 +66,9 @@ def main():
 	tgt_lang=args.lang
 
 	if args.is_covariate:
-		if args.variant == 1:
-			# Additive intervention added to encoder
-			model = CMBartForConditionalGeneration.from_pretrained(args.model_dir, cache_dir="/fs/clip-scratch/sweagraw/CACHE")
-			covariate_index = direction_to_id[args.eval_direction]
-		else:
-			# Additive intervention added to the LM
-			model = CMBartForConditionalGeneration2.from_pretrained(args.model_dir, cache_dir="/fs/clip-scratch/sweagraw/CACHE")
-			covariate_index = direction_to_id[args.eval_direction]
+		# Additive intervention added to encoder
+		model = CMBartForConditionalGeneration.from_pretrained(args.model_dir, cache_dir="/fs/clip-scratch/sweagraw/CACHE")
+		covariate_index = direction_to_id[args.eval_direction]
 	else:
 		model = MBartForConditionalGeneration.from_pretrained(args.model_dir, cache_dir="/fs/clip-scratch/sweagraw/CACHE")
 		covariate_index = None

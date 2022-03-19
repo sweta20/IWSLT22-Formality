@@ -29,7 +29,7 @@ tune_task=binary_classification
 output_dir=/fs/clip-controllablemt/IWSLT2022/models
 run_dir=/fs/clip-controllablemt/IWSLT2022/runs
 
-for tune_lang in de ja hi es; do
+for tune_lang in it; do
   if [[ $tune_task == binary_classification ]]; then
     # data_dir=/fs/clip-xling/projects/xformal/data/formality_classifiers_data/$tune_lang
     data_dir="/fs/clip-controllablemt/IWSLT2022/formality_classifiers_data/$tune_lang"

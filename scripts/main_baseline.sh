@@ -1,14 +1,15 @@
 #!/bin/bash
 
-for tlang in es ja de hi; do
-	# bash `dirname $0`/prepare_data.sh ${tlang}
+for tlang in hi; do
 
-	# # train baseline adapted on combined by default
-	# for direction in formal informal; do
-	# 	bash `dirname $0`/baseline_finetune.sh -t ${tlang} -f ${direction} 
-	# done;
+	bash `dirname $0`/prepare_data.sh ${tlang}
 
-	for domain in combined; do
+	# train baseline adapted on combined by default
+	for direction in formal informal; do
+		bash `dirname $0`/baseline_finetune.sh -t ${tlang} -f ${direction} -e baseline_finetune_combined_new
+	done;
+
+	# for domain in combined; do
 		# baseline
 		# bash `dirname $0`/baseline_evaluate.sh -t ${tlang} -d ${domain} -m models/model.en-${tlang} -e experiments/en-${tlang}/baseline/$domain/
 
@@ -20,26 +21,26 @@ for tlang in es ja de hi; do
 
 		# mbart translations
 		# exp_name=mBART
-		# python scripts/get_mbart_translations.py -d ${domain} -s dev -l ${tlang}
+		# python scripts/get_mbart_translations.py -d ${domain} -s dev -l ${tlang} -e ${exp_name}
 		# bash `dirname $0`/baseline_evaluate.sh -e experiments/en-${tlang}/$exp_name/${domain}/ -t ${tlang} -d ${domain} 
 
-		# exp_name=mBART_formal
+		# exp_name=mBART_formal_unfrozen
 		# python scripts/finetune_mbart.py -f formal
-		# python scripts/get_mbart_translations.py -d ${domain} -s dev -l ${tlang} -m models/facebook/mbart-large-50-one-to-many-mmt-finetuned-en-to-xx-formal -e ${exp_name}
+		# python scripts/get_mbart_translations.py -d ${domain} -s dev -l ${tlang} -m models/vastai/formal -e ${exp_name}
 		# bash `dirname $0`/baseline_evaluate.sh -e experiments/en-${tlang}/$exp_name/${domain}/ -t ${tlang} -d ${domain} 
 		
-		# exp_name=mBART_informal
+		# exp_name=mBART_informal_unfrozen
 		# python scripts/finetune_mbart.py -f informal
-		# python scripts/get_mbart_translations.py -d ${domain} -s dev -l ${tlang} -m models/facebook/mbart-large-50-one-to-many-mmt-finetuned-en-to-xx-informal
+		# python scripts/get_mbart_translations.py -d ${domain} -s dev -l ${tlang} -m models/vastai/informal -e ${exp_name}
 		# bash `dirname $0`/baseline_evaluate.sh -e experiments/en-${tlang}/$exp_name/${domain}/ -t ${tlang} -d ${domain}
 
-		exp_name=mBART_formal_covariate_last2_lm
-		python scripts/get_mbart_translations.py -d ${domain} -s dev -l ${tlang} -m models/facebook/mbart-large-50-one-to-many-mmt-finetuned-covariate-lm-en-to-xx -e ${exp_name} --is-covariate -f formal
-		bash `dirname $0`/baseline_evaluate.sh -e experiments/en-${tlang}/$exp_name/${domain}/ -t ${tlang} -d ${domain} 
+		# exp_name=mBART_formal_covariate_all
+		# python scripts/get_mbart_translations.py -d ${domain} -s dev -l ${tlang} -m models/vastai/covariate -e ${exp_name} --is-covariate -f formal
+		# bash `dirname $0`/baseline_evaluate.sh -e experiments/en-${tlang}/$exp_name/${domain}/ -t ${tlang} -d ${domain} 
 
-		exp_name=mBART_informal_covariate_last2_lm
-		python scripts/get_mbart_translations.py -d ${domain} -s dev -l ${tlang} -m models/facebook/mbart-large-50-one-to-many-mmt-finetuned-covariate-lm-en-to-xx -e ${exp_name} --is-covariate -f informal
-		bash `dirname $0`/baseline_evaluate.sh -e experiments/en-${tlang}/$exp_name/${domain}/ -t ${tlang} -d ${domain} 
+		# exp_name=mBART_informal_covariate_all
+		# python scripts/get_mbart_translations.py -d ${domain} -s dev -l ${tlang} -m  models/vastai/covariate -e ${exp_name} --is-covariate -f informal
+		# bash `dirname $0`/baseline_evaluate.sh -e experiments/en-${tlang}/$exp_name/${domain}/ -t ${tlang} -d ${domain} 
 
 		# m2m100 translations
 		# exp_name=m2m100_418M
@@ -52,7 +53,7 @@ for tlang in es ja de hi; do
 		# bash `dirname $0`/baseline_evaluate.sh -e experiments/en-${tlang}/$exp_name/${domain}/ -t ${tlang} -d ${domain} 
 		
 
-	done;
+	# done;
 
 done;
 
