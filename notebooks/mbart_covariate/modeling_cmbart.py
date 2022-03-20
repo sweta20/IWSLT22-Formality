@@ -371,6 +371,34 @@ class CMBartForConditionalGeneration2(CMBartPreTrainedModel):
     def get_covariate(self):
         return self.model.get_covariate()
 
+
+    def _prepare_encoder_decoder_kwargs_for_generation(
+        self, inputs_tensor: torch.Tensor, model_kwargs, model_input_name: Optional[str] = None
+    ) -> Dict[str, Any]:
+        # 1. get encoder
+        encoder = self.get_encoder()
+
+        # 2. prepare encoder args and encoder kwargs from model kwargs
+        irrelevant_prefix = ["decoder_", "cross_attn", "use_cache", "covariate"]
+        encoder_kwargs = {
+            argument: value
+            for argument, value in model_kwargs.items()
+            if not any(argument.startswith(p) for p in irrelevant_prefix)
+        }
+
+        # 3. make sure that encoder returns `ModelOutput`
+        model_input_name = model_input_name if model_input_name is not None else self.main_input_name
+        encoder_kwargs["return_dict"] = True
+        encoder_kwargs[model_input_name] = inputs_tensor
+        model_kwargs["encoder_outputs"]: ModelOutput = encoder(**encoder_kwargs)
+
+        if "covariate_ids" in model_kwargs:
+            covariate_outs = self.get_covariate()(model_kwargs["covariate_ids"])
+            model_kwargs["encoder_outputs"].last_hidden_state += covariate_outs
+
+        return model_kwargs
+
+
     def get_encoder(self):
         return self.model.get_encoder()
 
