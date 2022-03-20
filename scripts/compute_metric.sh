@@ -1,7 +1,7 @@
 
 if [ $tlang == "ja" ]; then
-  sacrebleu ${formal_ref} -tok char < ${exp_dir}/out.${split} > ${exp_dir}/scores
-  sacrebleu ${informal_ref} -tok char < ${exp_dir}/out.${split} >> ${exp_dir}/scores
+  sacrebleu ${formal_ref} -tok ja-mecab < ${exp_dir}/out.${split} > ${exp_dir}/scores
+  sacrebleu ${informal_ref} -tok ja-mecab < ${exp_dir}/out.${split} >> ${exp_dir}/scores
     python scorer.py \
   		-hyp ${exp_dir}/out.${split} \
   		-f  ${formal_ref_annotated} \
