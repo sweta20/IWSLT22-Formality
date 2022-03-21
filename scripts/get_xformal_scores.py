@@ -6,6 +6,7 @@ import argparse
 from utils import get_data, read_file
 import torch
 from tqdm import tqdm
+import numpy as np
 
 CACHE_DIR="/fs/clip-scratch/sweagraw/CACHE"
 
@@ -38,17 +39,25 @@ def main():
 		from_tf=bool(".ckpt" in args.model_dir),
 		config=config,
 		cache_dir=CACHE_DIR)
+	
+	scores = []
+	for text in tqdm(source):
+		model_inputs = tokenizer(text, return_tensors="pt",truncation=True, padding=True, max_length=200)
+		logits=model(**model_inputs).logits
+		scores.append(logits.tolist()[0][0])
+		if args.is_regression:
+			score = logits.tolist()[0][0]
+		else:
+			score = torch.softmax(logits, dim=1).tolist()[0][0]
+		scores.append(score)
 
-	with open(args.output, "w") as f:
-		scores = []
-		for text in tqdm(source):
-			model_inputs = tokenizer(text, return_tensors="pt",truncation=True, padding=True, max_length=200)
-			logits=model(**model_inputs).logits
-			if args.is_regression:
-				f.write(str(logits.tolist()[0][0])+ "\n")
-			else:
-				# only write scores for informal class
-				f.write(str(torch.softmax(logits, dim=1).tolist()[0][0])+ "\n")
+	print("Formality score (Mean):", np.mean(scores))
+	print("Formality score (Std):", np.std(scores))
+
+	if args.output is not None:
+		with open(args.output, "w") as f:
+			for score in scores:
+				f.write(str(score)+ "\n")
 	
 
 if __name__ == '__main__':
