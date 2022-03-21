@@ -1,0 +1,294 @@
+Target Language: es
+Formality: formal
+BLEU: 
+{
+ "name": "BLEU",
+ "score": 30.1,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.0.0",
+ "verbose_score": "63.9/38.8/25.5/17.0 (BP = 0.934 ratio = 0.936 hyp_len = 49398 ref_len = 52771)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "13a",
+ "smooth": "exp",
+ "version": "2.0.0"
+}
+COMET: 
+experiments/en-es/mBART_formal_covariate_all/None/out.generic	score: 0.5418
+Formality: informal
+BLEU: 
+{
+ "name": "BLEU",
+ "score": 30.3,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.0.0",
+ "verbose_score": "64.0/38.8/25.5/17.1 (BP = 0.939 ratio = 0.941 hyp_len = 49398 ref_len = 52499)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "13a",
+ "smooth": "exp",
+ "version": "2.0.0"
+}
+COMET: 
+experiments/en-es/mBART_informal_covariate_all/None/out.generic	score: 0.5452
+Formality: neutral
+BLEU: 
+{
+ "name": "BLEU",
+ "score": 30.2,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.0.0",
+ "verbose_score": "64.0/38.9/25.6/17.2 (BP = 0.934 ratio = 0.936 hyp_len = 49398 ref_len = 52789)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "13a",
+ "smooth": "exp",
+ "version": "2.0.0"
+}
+COMET: 
+experiments/en-es/mBART_neutral_covariate_all/None/out.generic	score: 0.5429
+Target Language: de
+Formality: formal
+BLEU: 
+{
+ "name": "BLEU",
+ "score": 29.0,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.0.0",
+ "verbose_score": "62.9/36.0/22.9/15.2 (BP = 0.975 ratio = 0.975 hyp_len = 52008 ref_len = 53319)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "13a",
+ "smooth": "exp",
+ "version": "2.0.0"
+}
+COMET: 
+experiments/en-de/mBART_formal_covariate_all/None/out.generic	score: 0.4877
+Formality: informal
+BLEU: 
+{
+ "name": "BLEU",
+ "score": 28.2,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.0.0",
+ "verbose_score": "62.0/35.0/22.1/14.5 (BP = 0.977 ratio = 0.977 hyp_len = 52008 ref_len = 53222)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "13a",
+ "smooth": "exp",
+ "version": "2.0.0"
+}
+COMET: 
+experiments/en-de/mBART_informal_covariate_all/None/out.generic	score: 0.4805
+Formality: neutral
+BLEU: 
+{
+ "name": "BLEU",
+ "score": 29.0,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.0.0",
+ "verbose_score": "62.9/35.9/22.9/15.1 (BP = 0.975 ratio = 0.975 hyp_len = 52008 ref_len = 53341)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "13a",
+ "smooth": "exp",
+ "version": "2.0.0"
+}
+COMET: 
+experiments/en-de/mBART_neutral_covariate_all/None/out.generic	score: 0.4867
+Target Language: ru
+Formality: formal
+BLEU: 
+{
+ "name": "BLEU",
+ "score": 19.0,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.0.0",
+ "verbose_score": "51.2/25.6/14.7/8.6 (BP = 0.943 ratio = 0.945 hyp_len = 44388 ref_len = 46984)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "13a",
+ "smooth": "exp",
+ "version": "2.0.0"
+}
+COMET: 
+experiments/en-ru/mBART_formal_covariate_all/None/out.generic	score: 0.3863
+Formality: informal
+BLEU: 
+{
+ "name": "BLEU",
+ "score": 19.0,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.0.0",
+ "verbose_score": "51.1/25.5/14.6/8.5 (BP = 0.947 ratio = 0.948 hyp_len = 44388 ref_len = 46811)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "13a",
+ "smooth": "exp",
+ "version": "2.0.0"
+}
+COMET: 
+experiments/en-ru/mBART_informal_covariate_all/None/out.generic	score: 0.3785
+Formality: neutral
+BLEU: 
+{
+ "name": "BLEU",
+ "score": 19.1,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.0.0",
+ "verbose_score": "51.3/25.8/14.8/8.7 (BP = 0.939 ratio = 0.941 hyp_len = 44388 ref_len = 47169)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "13a",
+ "smooth": "exp",
+ "version": "2.0.0"
+}
+COMET: 
+experiments/en-ru/mBART_neutral_covariate_all/None/out.generic	score: 0.3814
+Target Language: it
+Formality: formal
+BLEU: 
+{
+ "name": "BLEU",
+ "score": 30.9,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.0.0",
+ "verbose_score": "60.2/36.8/24.6/16.7 (BP = 0.999 ratio = 0.999 hyp_len = 48683 ref_len = 48748)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "13a",
+ "smooth": "exp",
+ "version": "2.0.0"
+}
+COMET: 
+experiments/en-it/mBART_formal_covariate_all/None/out.generic	score: 0.5811
+Formality: informal
+BLEU: 
+{
+ "name": "BLEU",
+ "score": 30.6,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.0.0",
+ "verbose_score": "60.3/36.7/24.5/16.6 (BP = 0.995 ratio = 0.995 hyp_len = 48683 ref_len = 48931)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "13a",
+ "smooth": "exp",
+ "version": "2.0.0"
+}
+COMET: 
+experiments/en-it/mBART_informal_covariate_all/None/out.generic	score: 0.5819
+Formality: neutral
+BLEU: 
+{
+ "name": "BLEU",
+ "score": 30.8,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.0.0",
+ "verbose_score": "60.4/37.0/24.7/16.8 (BP = 0.994 ratio = 0.994 hyp_len = 48683 ref_len = 48996)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "13a",
+ "smooth": "exp",
+ "version": "2.0.0"
+}
+COMET: 
+experiments/en-it/mBART_neutral_covariate_all/None/out.generic	score: 0.5854
+Target Language: hi
+Formality: formal
+BLEU: 
+{
+ "name": "BLEU",
+ "score": 15.1,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.0.0",
+ "verbose_score": "46.8/21.1/10.3/5.1 (BP = 1.000 ratio = 1.021 hyp_len = 60872 ref_len = 59604)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "13a",
+ "smooth": "exp",
+ "version": "2.0.0"
+}
+COMET: 
+experiments/en-hi/mBART_formal_covariate_all/None/out.generic	score: 0.5783
+Formality: informal
+BLEU: 
+{
+ "name": "BLEU",
+ "score": 15.0,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.0.0",
+ "verbose_score": "46.7/21.1/10.2/5.1 (BP = 1.000 ratio = 1.016 hyp_len = 60872 ref_len = 59940)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "13a",
+ "smooth": "exp",
+ "version": "2.0.0"
+}
+COMET: 
+experiments/en-hi/mBART_informal_covariate_all/None/out.generic	score: 0.5775
+Formality: neutral
+BLEU: 
+{
+ "name": "BLEU",
+ "score": 15.2,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.0.0",
+ "verbose_score": "46.9/21.2/10.3/5.1 (BP = 1.000 ratio = 1.022 hyp_len = 60872 ref_len = 59587)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "13a",
+ "smooth": "exp",
+ "version": "2.0.0"
+}
+COMET: 
+experiments/en-hi/mBART_neutral_covariate_all/None/out.generic	score: 0.5800
+Target Language: ja
+Formality: formal
+BLEU: 
+{
+ "name": "BLEU",
+ "score": 18.4,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:ja-mecab-0.996-IPA|smooth:exp|version:2.0.0",
+ "verbose_score": "53.4/24.7/12.5/6.9 (BP = 1.000 ratio = 1.056 hyp_len = 33535 ref_len = 31766)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "ja-mecab-0.996-IPA",
+ "smooth": "exp",
+ "version": "2.0.0"
+}
+COMET: 
+experiments/en-ja/mBART_formal_covariate_all/None/out.generic	score: 0.4229
+Formality: informal
+BLEU: 
+{
+ "name": "BLEU",
+ "score": 19.4,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:ja-mecab-0.996-IPA|smooth:exp|version:2.0.0",
+ "verbose_score": "53.7/25.7/13.5/7.6 (BP = 1.000 ratio = 1.075 hyp_len = 33535 ref_len = 31197)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "ja-mecab-0.996-IPA",
+ "smooth": "exp",
+ "version": "2.0.0"
+}
+COMET: 
+experiments/en-ja/mBART_informal_covariate_all/None/out.generic	score: 0.4155
+Formality: neutral
+BLEU: 
+{
+ "name": "BLEU",
+ "score": 19.3,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:ja-mecab-0.996-IPA|smooth:exp|version:2.0.0",
+ "verbose_score": "53.6/25.5/13.4/7.5 (BP = 1.000 ratio = 1.068 hyp_len = 33535 ref_len = 31414)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "ja-mecab-0.996-IPA",
+ "smooth": "exp",
+ "version": "2.0.0"
+}
+COMET: 
+experiments/en-ja/mBART_neutral_covariate_all/None/out.generic	score: 0.4134
