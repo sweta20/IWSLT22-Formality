@@ -20,7 +20,7 @@ for tlang in es de ru it hi ja; do
  			python scripts/get_xformal_scores.py -i ${hyp} -m /fs/clip-controllablemt/IWSLT2022/models/xformal-classifier-${tlang} >> $outfile
 
  			# Comet Source
- 			echo "Comet Score (to ${formality})" > $outfile
+ 			echo "Comet Score (to ${formality})" >> $outfile
  			comet-score -s ${src} -t ${hyp} --model wmt20-comet-qe-da --gpus 2 --model_storage_path /fs/clip-scratch/sweagraw/CACHE >> $outfile
 		done;
 

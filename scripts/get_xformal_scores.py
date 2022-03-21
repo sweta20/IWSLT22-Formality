@@ -44,7 +44,6 @@ def main():
 	for text in tqdm(source):
 		model_inputs = tokenizer(text, return_tensors="pt",truncation=True, padding=True, max_length=200)
 		logits=model(**model_inputs).logits
-		scores.append(logits.tolist()[0][0])
 		if args.is_regression:
 			score = logits.tolist()[0][0]
 		else:

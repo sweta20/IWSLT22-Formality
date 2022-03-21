@@ -3,8 +3,6 @@ tlang=hi
 domain=topical-chat
 exp_dir=experiments/${slang}-${tlang}/baseline/$domain/
 split=dev
-input=None
-generic=False
 preprocess=False
 while getopts "t:e:d:s:m:i:gp" opt; do
 	case $opt in
@@ -18,12 +16,8 @@ while getopts "t:e:d:s:m:i:gp" opt; do
 			split=$OPTARG ;;
 		m)
 			model=$OPTARG ;;
-		i)
-			input=$OPTARG ;;
 		g)
 			generic=True ;;
-		p)
-			preprocess=True ;;
 		\?)
 		echo "Invalid option: -$OPTARG" >&2
 		exit 1 ;;
@@ -33,19 +27,26 @@ while getopts "t:e:d:s:m:i:gp" opt; do
 	esac
 done
 
-data_dir=processed_data/${slang}-${tlang}
+
 mkdir -p ${exp_dir}
 
-if [ ! -f ${exp_dir}/out.${split} ]; then
-
-	if [ $preprocess == True ]; then
-		echo "Preprocessing $input and storing to ${exp_dir}/input.tok.bpe"
-		sacremoses -l en tokenize -x < ${input}> ${exp_dir}/input.tok
-		subword-nmt apply-bpe --codes models/model.en-${tlang}/bpe_codes < ${exp_dir}/input.tok > ${exp_dir}/input.tok.bpe
+if [ $generic == True ]; then
+	if [ $tlang != hi ] || [ $tlang != ja ]; then
+		src=../mustc/en-$tlang/data/tst-COMMON/txt/*.en
 	else
-		cp $input ${exp_dir}/input.tok.bpe
+		src=../mustc/en-$tlang/*.en
 	fi;
+else
+	src=internal_split/${slang}-${tlang}/dev.combined.en
+fi;
 
+if [ ! -f ${exp_dir}/input.tok.bpe ]; then
+	echo "Preprocessing ${exp_dir}/input.tok.bpe"
+	sacremoses -l en tokenize -x < ${src} > ${exp_dir}/input.tok
+	subword-nmt apply-bpe --codes models/model.en-${tlang}/bpe_codes < ${exp_dir}/input.tok > ${exp_dir}/input.tok.bpe
+fi;
+
+if [ ! -f ${exp_dir}/out.${split} ]; then
 	echo "Translating ${exp_dir}/input.tok.bpe"
 	sockeye-translate -m $model --input ${exp_dir}/input.tok.bpe --output ${exp_dir}/out.${split}.tok.bpe
 	sed -re 's/@@( |$)//g' <  ${exp_dir}/out.${split}.tok.bpe >  ${exp_dir}/out.${split}.tok
@@ -62,7 +63,6 @@ if [ $generic == False ]; then
 else
 	echo "Running Generic Evaluation on ${exp_dir}/out.${split}"
 	hyp=${exp_dir}/out.${split}
-	src=${input}
 	if [ $tlang != hi ] || [ $tlang != ja ]; then
 		ref=../mustc/en-$tlang/data/tst-COMMON/txt/*.${tlang}
 	else
