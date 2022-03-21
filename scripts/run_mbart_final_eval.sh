@@ -34,7 +34,7 @@ for tlang in hi ja; do
 		src=../mustc/en-$tlang/*.en
 		ref=../mustc/en-$tlang/*.${tlang}
 
-		# python scripts/get_mbart_translations.py -l $tlang --source ${src} -m models/vastai/covariate-alldata -e ${exp_name} --is-covariate -f ${formality} -s generic 
+		python scripts/get_mbart_translations.py -l $tlang --source ${src} -m models/vastai/covariate-alldata -e ${exp_name} --is-covariate -f ${formality} -s generic 
 
 		hyp=experiments/en-${tlang}/${exp_name}/None/out.generic
 

@@ -4,7 +4,7 @@ domain=topical-chat
 exp_dir=experiments/${slang}-${tlang}/baseline/$domain/
 split=dev
 preprocess=False
-while getopts "t:e:d:s:m:i:gp" opt; do
+while getopts "t:e:d:s:m:i:gpe" opt; do
 	case $opt in
 		t)
 			tlang=$OPTARG ;;
@@ -27,17 +27,17 @@ while getopts "t:e:d:s:m:i:gp" opt; do
 	esac
 done
 
-
+echo "Experiment Directory: $exp_dir"
 mkdir -p ${exp_dir}
 
 if [ $generic == True ]; then
-	if [ $tlang != hi ] || [ $tlang != ja ]; then
+	if [ $tlang != hi ] && [ $tlang != ja ]; then
 		src=../mustc/en-$tlang/data/tst-COMMON/txt/*.en
 	else
 		src=../mustc/en-$tlang/*.en
 	fi;
 else
-	src=internal_split/${slang}-${tlang}/dev.combined.en
+	src=internal_split/${slang}-${tlang}/${split}.combined.en
 fi;
 
 if [ ! -f ${exp_dir}/input.tok.bpe ]; then
@@ -63,7 +63,7 @@ if [ $generic == False ]; then
 else
 	echo "Running Generic Evaluation on ${exp_dir}/out.${split}"
 	hyp=${exp_dir}/out.${split}
-	if [ $tlang != hi ] || [ $tlang != ja ]; then
+	if [ $tlang != hi ] && [ $tlang != ja ]; then
 		ref=../mustc/en-$tlang/data/tst-COMMON/txt/*.${tlang}
 	else
 		ref=../mustc/en-$tlang/*.${tlang}
