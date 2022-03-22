@@ -1,0 +1,23 @@
+Formality Score (to formal)
+Formality score (Mean): 0.07133107706904411
+Formality score (Std): 0.14790042318681496
+Comet Score (to formal)
+../formality-control_UMD/EN-HI/unconstrained/formality/blind-test/formality-control-2.formal.hi	score: 0.2014
+Formality Score (to informal)
+Formality score (Mean): 0.20155440781575937
+Formality score (Std): 0.33830603846685703
+Comet Score (to informal)
+../formality-control_UMD/EN-HI/unconstrained/formality/blind-test/formality-control-2.informal.hi	score: 0.1940
+Self-BLEU: 
+{
+ "name": "BLEU",
+ "score": 84.3,
+ "signature": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.0.0",
+ "verbose_score": "92.6/87.2/82.9/78.9 (BP = 0.989 ratio = 0.989 hyp_len = 13720 ref_len = 13870)",
+ "nrefs": "1",
+ "case": "mixed",
+ "eff": "no",
+ "tok": "13a",
+ "smooth": "exp",
+ "version": "2.0.0"
+}

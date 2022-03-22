@@ -1,32 +1,23 @@
 #!/bin/bash
 
-# for tlang in ja de hi ru es it; do
+for tlang in hi; do
 
-# 	bash scripts/baseline_evaluate.sh -t ${tlang} -s generic -g -e experiments/en-${tlang}/baseline/generic -m models/model.en-${tlang}
+	# bash `dirname $0`/prepare_data.sh ${tlang}
 
-# 	for direction in formal informal; do
-# 		bash `dirname $0`/baseline_evaluate.sh -s generic -e experiments/en-${tlang}/baseline_finetune_combined/generic/${direction}/ -t ${tlang} -g -m experiments/en-${tlang}/$exp_name/combined/${direction}/model.en-${tlang}.adapt
-# 	done;
-# done;
+	# train baseline adapted on combined by default
+	# for direction in formal informal; do
+	# 	bash `dirname $0`/baseline_finetune.sh -t ${tlang} -f ${direction} -e baseline_finetune_combined
+	# done;
 
-# for tlang in ja; do
+	for domain in combined; do
+	# 	# baseline
+	# 	bash `dirname $0`/baseline_evaluate.sh -t ${tlang} -d ${domain} -m models/model.en-${tlang} -e experiments/en-${tlang}/baseline/$domain/
 
-# 	bash `dirname $0`/prepare_data.sh ${tlang}
-
-# 	# train baseline adapted on combined by default
-# 	for direction in formal informal; do
-# 		bash `dirname $0`/baseline_finetune.sh -t ${tlang} -f ${direction} -e baseline_finetune_combined
-# 	done;
-
-# 	for domain in combined; do
-# 		# baseline
-# 		bash `dirname $0`/baseline_evaluate.sh -t ${tlang} -d ${domain} -m models/model.en-${tlang} -e experiments/en-${tlang}/baseline/$domain/
-
-# 		# baseline adapted
-# 		exp_name=baseline_finetune_combined
-# 		for direction in formal informal; do
-# 			bash `dirname $0`/baseline_evaluate.sh -e experiments/en-${tlang}/$exp_name/${domain}/${direction}/ -t ${tlang} -d ${domain} -m experiments/en-${tlang}/$exp_name/combined/${direction}/model.en-${tlang}.adapt
-# 		done;
+		# baseline adapted
+		exp_name=baseline_finetune_combined
+		for direction in formal informal; do
+			bash `dirname $0`/baseline_evaluate.sh -e experiments/en-${tlang}/$exp_name/${domain}/${direction}/ -t ${tlang} -d ${domain} -m experiments/en-${tlang}/$exp_name/combined/${direction}/model.en-${tlang}.adapt
+		done;
 
 # 		mbart translations
 # 		exp_name=mBART
@@ -64,9 +55,9 @@
 # 		# python scripts/get_m2m_translations.py -d ${domain} -s dev -l ${tlang} -e ${exp_name}
 # 		bash `dirname $0`/baseline_evaluate.sh -e experiments/en-${tlang}/$exp_name/${domain}/ -t ${tlang} -d ${domain} 
 		
-# 	done;
+	done;
 
-# done;
+done;
 
 
 # # Cross validation results

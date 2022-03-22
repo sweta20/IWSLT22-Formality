@@ -1,13 +1,13 @@
 
 eval_dir=evaluate_official
 mkdir -p ${eval_dir}
-for tlang in es de ru it hi ja; do
+for tlang in ru; do
 
 	mkdir -p ${eval_dir}/${tlang}
 
 	results_dir=../formality-control_UMD/EN-${tlang^^}/unconstrained/formality/blind-test
 
-	for sid in 1 2 3 4; do
+	for sid in 1 2 3 4 5; do
 
 		outfile=${eval_dir}/${tlang}/${sid}.score
 		touch $outfile
@@ -36,3 +36,4 @@ for tlang in es de ru it hi ja; do
 
 	done;
 done;
+

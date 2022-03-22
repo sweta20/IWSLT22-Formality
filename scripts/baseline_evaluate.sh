@@ -4,6 +4,7 @@ domain=topical-chat
 exp_dir=experiments/${slang}-${tlang}/baseline/$domain/
 split=dev
 preprocess=False
+generic=False
 while getopts "t:e:d:s:m:i:gpe" opt; do
 	case $opt in
 		t)
